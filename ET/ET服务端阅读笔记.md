@@ -20,7 +20,7 @@ while (true)
 ```
 可以看到在服务器的帧里做了两个事情，OneThreadSynchronizationContext的update和EventSystem的update,如图,
 
-![image](https://note.youdao.com/yws/api/personal/file/WEB24ea3bafff72e4c4f5cd8425bf266095?method=download&shareKey=dc21570799143ced6ea6cb0e45f88357)
+![image](images/et01.png)
 
 - OneThreadSynchronizationContext：继承SynchronizationContext，作用是处理socket异步回调的io事件，回到主线程处理。实现方式是使用线程安全的并发队列ConcurrentQueue。
 - EventSystem：事件机制，ET服务端的一大特点是它的组件设计ESC.EventSystem一帧要处理就是除了io回调的其它主逻辑，比如定时器（timerCompent.update）,网络发包（NetworkCompent.update）,各个updateSystems的更新逻辑。
@@ -30,13 +30,13 @@ while (true)
 ## 网络层
 ### 网络IO
 ET同时支持kcp tcp websocket协议。这里主要从tcp的实现来看。
-![image](https://note.youdao.com/yws/api/personal/file/WEB46b8d01512bacda451be3508858d8eac?method=download&shareKey=dc3097f6eded2943f7b3105111a9088a)
+![image](images/et02.png)
 - 网络IO:框架使用的是c#的异步socket,所有socket回调回到主线程处理。
 - ConcurrentQueue:并发队列，线程安全
 
 ### 维护Connections
 维护connections是实现了跟protobuf一样概念的Service和Channel，如下
-![image](https://note.youdao.com/yws/api/personal/sync?method=download&fileId=WEB8886807ca8382c755dafd29df729b94f&version=19432&cstk=6I6_zyao)
+![image](images/et03.png)
 ##### NetworkCompent组件:
 1. InnerNetworkCompent（内部服务端进程连接）,OuterNetworkCompent（处理玩家连接）。
 1. sessions:维护所有连接，session（channel+rpcId）
@@ -95,7 +95,7 @@ public static async ETTask<IResponse> Call(message)
 ## ECS设计
 ECS也就是Entity-Component-System,ET的EVENTSYSTEM都是ECS的设计。大概的框架如下：
 
-![image](https://note.youdao.com/yws/api/personal/file/WEB2137b5ea7b3e732789cce3f3835d5fb9?method=download&shareKey=a3418934e75e866868ddc8b919f0713e)
+![image](images/et04.png)
 
 - entity:包含多个compent
 - compent:主要负责Data部分，可对应多个systems,比如OpcodeTypeComponent同时需要Load和Updata，配置两个system
@@ -140,7 +140,7 @@ Game.EventSystem.Add(DLLType.Hotfix, DllHelper.GetHotfixAssembly());
 在组件设计的基础上，多进程的方式就是各个App加载各自需要的Componentt
 manager,目前的几个AppType
 
-![image](https://note.youdao.com/yws/api/personal/sync?method=download&fileId=WEBc9725153a09bd41e636160a72ee23afb&version=19906&cstk=6I6_zyao)
+![image](images/et05.png)
 
 - Manager:负责启动和重启其它App
 - Realm:Gate的负载均衡，在GateSession里面给客户端random一个地址，同时加上sessionkey验证。
