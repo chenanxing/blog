@@ -1,7 +1,7 @@
 # ET服务端阅读笔记
 
 ## 知识准备
-[C#学习笔记1](https://note.youdao.com/)
+[C#学习笔记1](https://github.com/chenanxing/blog/blob/master/ET/C%23%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01.md)
 
 
 ET用c#.dotnet实现了一套分布式游戏服务端，特点是能与unity共享逻辑代码，运行热更新，开发效率高（游戏逻辑单线程）等等。
