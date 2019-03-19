@@ -1,3 +1,7 @@
+---
+title: '2019_03_17_akka_actor'
+date: 2019-03-17 21:10:33
+---
 ## AKKA学习actor篇
 
 ### 什么是actor
