@@ -1,3 +1,7 @@
+---
+title: '2019_03_25_akka_spawn_benchmark'
+date: 2019-03-25 21:10:33
+---
 ## akka的actor并发benchmark
 
 akka.net的解决方案中有spawnbenchmark工程
@@ -28,12 +32,13 @@ private void StartRun(int n)
 
 下面是网上的一些测试数据
 
-![image](https://github.com/chenanxing/blog/blob/master/etakka/2019_03_25_akka_spawn_benchmark/akka_actor_spawn_benchmark02.png?raw=true)
+![image](https://github.com/chenanxing/blog/blob/master/etakka/2019_03_25_akka_spawn_benchmark/akka_actor_spawn_benchmark03.png?raw=true)
+
 
 - 这里主要是对比go的goroutine并发性能
 
 #### 本地测试环境：【i5-7500, Win10】
+![image](https://github.com/chenanxing/blog/blob/master/etakka/2019_03_25_akka_spawn_benchmark/akka_actor_spawn_benchmark02.png?raw=true)
 
-![image](https://github.com/chenanxing/blog/blob/master/etakka/2019_03_25_akka_spawn_benchmark/akka_actor_spawn_benchmark03.png?raw=true)
 
 可以看到，akka.net跟go的actor并发性能还是差很多
