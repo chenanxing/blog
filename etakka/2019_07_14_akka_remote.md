@@ -1,5 +1,5 @@
 ---
-title: '2019_07_14_akka_remote（未完）'
+title: '2019_07_14_akka_remote'
 date: 2019-07-14 21:10:33
 ---
 # Akka学习remote篇
