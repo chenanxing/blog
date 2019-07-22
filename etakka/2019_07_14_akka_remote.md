@@ -65,5 +65,3 @@ var remoteEcho1 = system.ActorOf(Props.Create(() => new EchoActor()), "remoteech
 	
 ### 实现细节
 transports和endpointManager就两个比较重要的类，transports负责管理底层连接和endpointManager负责上层发送接收
-
-类关系图（未完）
