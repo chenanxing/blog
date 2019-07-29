@@ -1,6 +1,12 @@
+---
+title: '2019_07_29_akka_routing'
+date: 2019-07-29 9:40:33
+---
+# Akka学习routing篇
+
 先从akka的routing的概念，再到用法入手，再深入了解其实现细节
 #### akka中routing的概念
-![image](![image](https://github.com/chenanxing/blog/blob/master/etakka/2019_07_29_akka_routing/akka_routing01.png?raw=true))
+![image](https://github.com/chenanxing/blog/blob/master/etakka/2019_07_29_akka_routing/akka_routing01.png?raw=true)
 其中：
 
 - router:路由器，也就是消息分发器，成员变量包括路由算法routeLogic和routee处理消息的节点
@@ -50,7 +56,7 @@ var actor = system.ActorOf(props, "workers");
 - RoundRobinRoutingLogic:轮询，按顺序轮流发给routee
 - RandomRoutingLogic:随机顺序轮流发给routee
 - SmallestMailboxRoutingLogic:策略是选择最少处理消息的routee
-![image](![image](https://github.com/chenanxing/blog/blob/master/etakka/2019_07_29_akka_routing/akka_routing02.png?raw=true))
+![image](https://github.com/chenanxing/blog/blob/master/etakka/2019_07_29_akka_routing/akka_routing02.png?raw=true)
 - BroadcastRoutingLogic
 - ScatterGatherFirstCompletedRoutingLogic
 - TailChoppingRoutingLogic
