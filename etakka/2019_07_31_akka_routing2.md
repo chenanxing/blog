@@ -44,7 +44,6 @@ else if (RouterConfig is Group group)
 }
 ```
 - pool方式：创建子actor
-
 ```
 internal virtual Routee NewRoutee(Props routeeProps, IActorContext context)
 {
@@ -52,7 +51,6 @@ internal virtual Routee NewRoutee(Props routeeProps, IActorContext context)
 }
 ```
 - group方式：通过actorpath引用actor
-
 ```
 internal Routee RouteeFor(string path, IActorContext context)
 {
@@ -74,14 +72,12 @@ public override void SendMessage(Envelope envelope)
 如果是系统消息，直接自已处理。系统消息指的是GetRoutees,AddRoutee,RemoveRoutee,Terminated这几个消息，另外如果是pool，还要处理resize，AdjustPoolSize消息
 
 AdjustPoolSize消息由用户主动发起调用，比如：
-
 ```
 actor.Tell(new AdjustPoolSize(4));
 actor.Tell(new AdjustPoolSize(-2));
 ```
 
 Resize消息由ResizePoolCell自己发起，根据消息数量动态调整
-        
 ```
 public override void SendMessage(Envelope envelope)
 {
@@ -119,7 +115,6 @@ router.type-mapping {
 其中注意到，smallest-mailbox没有group方式。看看它的策略选择方法select就知道原因
 
 ![image](https://github.com/chenanxing/blog/blob/master/etakka/2019_07_31_akka_routing/akka_routing202.png?raw=true)
-
 ```
 private Routee SelectNext(Routee[] routees)
 {
@@ -161,7 +156,6 @@ int index = (Interlocked.Increment(ref _next) & int.MaxValue)%size;
 routees[ThreadLocalRandom.Current.Next(routees.Length)]
 ```
 - broadcast：每个routee都转发消息
-
 ```
 new SeveralRoutees(routees);
 ```
@@ -172,7 +166,6 @@ var firstFinishedTask = await Task.WhenAny(tasks);
 return await firstFinishedTask;
 ```
 - tail-chopping:随机找一个routee转发消息，如果一定时间没响应，重新找一个发
-
 ```
 _scheduler.Advanced.ScheduleRepeatedly(TimeSpan.Zero, _interval, async () =>
 {
