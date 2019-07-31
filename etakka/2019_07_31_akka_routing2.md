@@ -9,7 +9,7 @@ date: 2019-07-31 9:40:33
 其实要实现一个路由功能，就是路由，路由策略，路由节点三个部分组成。akka也不例外，整理了下类关系图，看看它的router结构
 
 #### Router类关系
-![image](https://github.com/chenanxing/blog/blob/master/etakka/2019_07_31_akka_routing/akka_routing201.png?raw=true)
+![image](https://github.com/chenanxing/blog/blob/master/etakka/2019_07_31_akka_routing2/akka_routing201.png?raw=true）
 
 - RouterActorCell:路由actor,包括配置属性（通过判断配置决定创建方式是pool还是group）,维护Routee(路由节点)和RoutingLogic（路由策略），响应GetRoutees,AddRoutee,RemoveRoutee,Terminated四个系统消息，其中Terminated消息由加入时给actor发watch消息，actor停止时会通知回Terminated（如果不是系统消息，则根据路由策略向路由节点转发消息）
 - RouterActor:是RouterActorCell的actorBase,用来响应消息
@@ -114,7 +114,7 @@ router.type-mapping {
 ```
 其中注意到，smallest-mailbox没有group方式。看看它的策略选择方法select就知道原因
 
-![image](https://github.com/chenanxing/blog/blob/master/etakka/2019_07_31_akka_routing/akka_routing202.png?raw=true)
+![image](https://github.com/chenanxing/blog/blob/master/etakka/2019_07_31_akka_routing2/akka_routing202.png?raw=true）
 ```
 private Routee SelectNext(Routee[] routees)
 {
