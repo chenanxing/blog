@@ -4,6 +4,7 @@ date: 2019-07-29 9:40:33
 ---
 # Akka学习routing篇
 
+
 先从akka的routing的概念，再到用法入手，再深入了解其实现细节
 #### akka中routing的概念
 ![image](https://github.com/chenanxing/blog/blob/master/etakka/2019_07_29_akka_routing/akka_routing01.png?raw=true)
@@ -50,34 +51,3 @@ akka.actor.deployment {
 var props = Props.Create<Worker>().WithRouter(FromConfig.Instance);
 var actor = system.ActorOf(props, "workers");
 ```
-
-
-#### 提供的几个路由算法
-- RoundRobinRoutingLogic:轮询，按顺序轮流发给routee
-- RandomRoutingLogic:随机顺序轮流发给routee
-- SmallestMailboxRoutingLogic:策略是选择最少处理消息的routee
-![image](https://github.com/chenanxing/blog/blob/master/etakka/2019_07_29_akka_routing/akka_routing02.png?raw=true)
-- BroadcastRoutingLogic
-- ScatterGatherFirstCompletedRoutingLogic
-- TailChoppingRoutingLogic
-- ConsistentHashingRoutingLogic
-
-#### 实现细节（未完）
-Router
-    logic
-    routees=[]
-    Pool
-    Group
-Routee
-
-ResizablePoolActor(RouterPoolActor)
-ResizablePoolCell(RoutedActorCell)
-
-RoutingLogic
-	RoundRobinRoutingLogic
-	RandomRoutingLogic
-	SmallestMailboxRoutingLogic
-	BroadcastRoutingLogic
-	ScatterGatherFirstCompletedRoutingLogic
-	TailChoppingRoutingLogic
-	ConsistentHashingRoutingLogic
